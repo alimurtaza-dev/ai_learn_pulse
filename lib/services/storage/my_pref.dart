@@ -1,6 +1,8 @@
+
 import 'package:get_storage/get_storage.dart';
 
 import '../../app_constants/app_prefrence_constants.dart';
+import '../../models/user_model/user_model.dart';
 
 class MyPref {
   static final _storage = GetStorage();
@@ -11,22 +13,17 @@ class MyPref {
     _storage.write(AppPrefrenceConstants.currentUserToken, token);
   }
 
-  // static void saveUser(UserModel? user) {
-  //   if (user != null) {
-  //     _storage.write(
-  //       AppPrefrenceConstants.currentUser,
-  //       jsonEncode(user.toJson()),
-  //     );
-  //   }
-  // }
+  static void saveUser(List<UserData> users) async {
+    _storage.remove(AppPrefrenceConstants.currentUser); // Clear existing data
+    final userDataList = users.map((user) => user.toJson()).toList();
+    await _storage.write(AppPrefrenceConstants.currentUser, userDataList);
+  }
 
-  // static UserModel? getSavedUser() {
-  //   String? userJson = _storage.read(AppPrefrenceConstants.currentUser);
-  //   if (userJson != null && userJson.isNotEmpty) {
-  //     return UserModel.fromJson(jsonDecode(userJson));
-  //   }
-  //   return null;
-  // }
+  static List<UserData> getSavedUser() {
+    final userList =
+        _storage.read<List<dynamic>>(AppPrefrenceConstants.currentUser) ?? [];
+    return userList.map((json) => UserData.fromJson(json)).toList();
+  }
 
 
   static String? userToken() =>

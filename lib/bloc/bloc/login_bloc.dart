@@ -2,6 +2,9 @@ import 'package:ai_learn_pulse/repository/auth_repository/auth_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../main.dart';
+import '../../services/storage/session_manager/session_controller.dart';
+
 part 'login_event.dart';
 part 'login_state.dart';
 
@@ -27,18 +30,37 @@ class LoginBloc extends Bloc<LoginEvents, LoginStates> {
     );
   }
 
-  void _onFormSubmitted(
-    LoginApi event,
-    Emitter<LoginStates> emit,
-  ) async {
-    emit(state.copyWith(message: 'Logging in...'));
+ void _onFormSubmitted(
+  LoginApi event,
+  Emitter<LoginStates> emit,
+) async {
+  emit(state.copyWith(message: 'Logging in...'));
 
-    try {
-      final response = await authRepository.login(state.phone, state.password);
-      emit(state.copyWith(message: response.message));
-      // Navigate to the main screen or handle the response as needed
-    } catch (e) {
-      emit(state.copyWith(message: e.toString()));
+  try {
+    final loginResponse = await authRepository.userlogin(state.phone, state.password);
+    if (loginResponse.message == "Login successful") {
+      if (loginResponse.data?.first.token?.isEmpty==true) {
+        emit(state.copyWith(message: 'Login successful, but token is missing.'));
+        return;
+      }
+      final sessionController = getIt<SessionController>();
+      await sessionController.saveUserToken(loginResponse.data?.first.token??'');
+      final userDataResponse = await authRepository.fetchLoggedinUserData();
+
+      if ((userDataResponse.success ?? false) && userDataResponse.data != null)  {
+         sessionController.saveUser(userDataResponse.data??[]);
+        emit(state.copyWith(message: 'Login successful.'));
+      } else {
+        emit(state.copyWith(message: 'Failed to fetch user data.'));
+      }
+    } else {
+      // Handle login failure
+      emit(state.copyWith(message: loginResponse.message));
     }
+  } catch (e) {
+    // Handle errors
+    emit(state.copyWith(message: e.toString()));
   }
+}
+
 }

@@ -2,18 +2,19 @@ import 'package:ai_learn_pulse/app_constants/api_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
+import '../../models/login_model/loggedin_user_model.dart';
 import '../../models/login_model/login_response_model.dart';
+
 import '../../utils/server.dart';
 
 class AuthRepository {
-  Future<LoginResponseModel> login(String phone, String password) async {
+  Future<LoginResponseModel> userlogin(String email, String password) async {
     try {
       final userdata = FormData();
       userdata.fields.addAll([
-        MapEntry('mobile_no', phone.replaceFirst("+", "")),
+        MapEntry('mobile_no', email),
         MapEntry('password', password),
       ]);
-
       final Response response = await Server.post(
         ApiConstants.loginUrl,
         data: userdata,
@@ -26,6 +27,22 @@ class AuthRepository {
       debugPrint('Error: $e');
       return LoginResponseModel(
           message: "An error occurred. Please try again later.");
+    }
+  }
+
+  Future<LoginUserModel> fetchLoggedinUserData() async {
+    try {
+      final Response response = await Server.get(
+        ApiConstants.loggedinUserUrl,
+      );
+      return LoginUserModel.fromJson(response.data);
+    } catch (e) {
+      if (e is DioException && e.response?.data != null) {
+        return LoginUserModel.fromJson(e.response?.data);
+      }
+      debugPrint('Error: $e');
+      return LoginUserModel(
+          message: "An error occurred while fetching user data.");
     }
   }
 }

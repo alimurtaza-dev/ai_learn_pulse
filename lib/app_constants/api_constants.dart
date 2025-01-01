@@ -15,4 +15,5 @@ class ApiConstants {
   static const liveUrl = 'https://livelms.hisabkarlay.com/api';
 
   static const loginUrl = '/login';
+  static const loggedinUserUrl = '/loggedin/user';
 }

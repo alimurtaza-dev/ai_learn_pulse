@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'bloc/bloc/login_bloc.dart';
 import 'gen/colors.gen.dart';
 import 'screens/login_screen/login_screen.dart';
+import 'services/storage/session_manager/session_controller.dart';
 
 GetIt getIt = GetIt.instance;
 void main() {
@@ -38,4 +39,5 @@ void servicesLocator() {
   getIt.registerLazySingleton<AuthRepository>(() => AuthRepository());
   getIt.registerFactory<LoginBloc>(
       () => LoginBloc(authRepository: getIt<AuthRepository>()));
+  getIt.registerLazySingleton<SessionController>(() => SessionController());
 }
