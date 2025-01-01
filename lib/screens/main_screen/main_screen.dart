@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../gen/assets.gen.dart';
-import '../../../../../gen/colors.gen.dart';
-import '../../home_screen/view/home_screen.dart';
-import '../cubit/main_screen_cubit.dart';
+import '../../../../gen/assets.gen.dart';
+import '../../../../gen/colors.gen.dart';
+import '../home_screen/home_screen.dart';
+import 'cubit/main_screen_cubit.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});

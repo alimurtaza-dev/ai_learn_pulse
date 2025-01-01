@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../gen/assets.gen.dart';
-import '../../../../../utils/app_extensions.dart';
-import '../../../../../utils/app_navigator.dart';
-import '../../../../../utils/screen_utils.dart';
-import '../../../../../utils/textfield_validations.dart';
-import '../../../../../widgets/app_button.dart';
-import '../../../../../widgets/app_text_field.dart';
-import '../../../../../widgets/rich_text_widget.dart';
-import '../../login_screen/view/login_screen.dart';
-import '../../verification_screen/view/verification_screen.dart';
+import '../../../../gen/assets.gen.dart';
+import '../../../../utils/app_extensions.dart';
+import '../../../../utils/app_navigator.dart';
+import '../../../../utils/screen_utils.dart';
+import '../../../../utils/textfield_validations.dart';
+import '../../../../widgets/app_button.dart';
+import '../../../../widgets/app_text_field.dart';
+import '../../../../widgets/rich_text_widget.dart';
+import '../login_screen/login_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -54,9 +53,7 @@ class SignUpScreen extends StatelessWidget {
                     validator: TextFieldValidators.passwordValidator,
                   ),
                   30.sizeBoxHeight,
-                  AppButton(
-                      onPressed: () => _openVerificationScreen(context),
-                      text: "Sign Up"),
+                  AppButton(onPressed: () {}, text: "Sign Up"),
                   10.sizeBoxHeight,
                   Row(
                     children: [
@@ -89,10 +86,6 @@ class SignUpScreen extends StatelessWidget {
   }
 
   void _openLoginScreen(BuildContext context) {
-    AppNavigator.push(context, const LoginScreen());
-  }
-
-  void _openVerificationScreen(BuildContext context) {
-    AppNavigator.push(context, const VerificationScreen());
+    AppNavigator.push(context, LoginScreen());
   }
 }

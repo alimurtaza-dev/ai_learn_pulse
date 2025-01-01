@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../utils/app_navigator.dart';
-import '../../../widgets/app_button.dart';
-import '../../../widgets/network_image_view.dart';
-import '../../../widgets/settings_tab_view.dart';
-import '../../settings_screen/settings_screen.dart';
-import 'edit_profile_screen.dart';
+import '../../widgets/app_button.dart';
+import '../../widgets/network_image_view.dart';
+import '../../widgets/settings_tab_view.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -17,7 +14,7 @@ class ProfileScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: GestureDetector(
-                onTap: () => _openSettingsScreen(context),
+                onTap: () {},
                 child: const Icon(Icons.settings)),
           )
         ],
@@ -124,14 +121,14 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: AppButton(
-                        onPressed: () => _openEditProfileScreen(context),
+                        onPressed: (){},
                         text: "Add Experience",
                       ),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
                       child: AppButton(
-                        onPressed: () => _openEditProfileScreen(context),
+                        onPressed: () {},
                         text: "Edit Profile",
                       ),
                     ),
@@ -219,11 +216,5 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  void _openEditProfileScreen(BuildContext context) {
-    AppNavigator.push(context, const EditProfileScreen());
-  }
 
-  void _openSettingsScreen(BuildContext context) {
-    AppNavigator.push(context, const SettingsScreen());
-  }
 }

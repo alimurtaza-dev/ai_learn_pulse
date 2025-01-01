@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../gen/assets.gen.dart';
-import '../../../../../utils/app_extensions.dart';
-import '../../../../../utils/app_navigator.dart';
-import '../../../../../utils/screen_utils.dart';
-import '../../../../../utils/textfield_validations.dart';
-import '../../../../../widgets/app_button.dart';
-import '../../../../../widgets/app_text_field.dart';
-import '../../verification_screen/view/verification_screen.dart';
+import '../../../../gen/assets.gen.dart';
+import '../../../../utils/app_extensions.dart';
+import '../../../../utils/screen_utils.dart';
+import '../../../../utils/textfield_validations.dart';
+import '../../../../widgets/app_button.dart';
+import '../../../../widgets/app_text_field.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   const ForgetPasswordScreen({super.key});
@@ -45,9 +43,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                     validator: TextFieldValidators.emailFieldValidation,
                   ),
                   40.sizeBoxHeight,
-                  AppButton(
-                      onPressed: () => _openVerificationScreen(context),
-                      text: "Submit"),
+                  AppButton(onPressed: () {}, text: "Submit"),
                   20.sizeBoxHeight,
                 ],
               ).paddingSymmetric(horizontal: 20),
@@ -56,9 +52,5 @@ class ForgetPasswordScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void _openVerificationScreen(BuildContext context) {
-    AppNavigator.push(context, const VerificationScreen());
   }
 }

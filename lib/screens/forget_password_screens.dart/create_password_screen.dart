@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../gen/assets.gen.dart';
-import '../../../../../utils/app_extensions.dart';
-import '../../../../../utils/app_navigator.dart';
-import '../../../../../utils/screen_utils.dart';
-import '../../../../../utils/textfield_validations.dart';
-import '../../../../../widgets/app_button.dart';
-import '../../../../../widgets/app_text_field.dart';
-import '../../verification_screen/view/verification_screen.dart';
+import '../../../../gen/assets.gen.dart';
+import '../../../../utils/app_extensions.dart';
+import '../../../../utils/screen_utils.dart';
+import '../../../../utils/textfield_validations.dart';
+import '../../../../widgets/app_button.dart';
+import '../../../../widgets/app_text_field.dart';
 
 class CreatePasswordScreen extends StatelessWidget {
   const CreatePasswordScreen({super.key});
@@ -26,7 +24,7 @@ class CreatePasswordScreen extends StatelessWidget {
                   Assets.appIcons.placeHolder.svg(height: 100),
                   30.sizeBoxHeight,
                   const Text(
-                    "Rest your Password?",
+                    "Reset your Password?",
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                   10.sizeBoxHeight,
@@ -46,7 +44,7 @@ class CreatePasswordScreen extends StatelessWidget {
                   ),
                   40.sizeBoxHeight,
                   AppButton(
-                      onPressed: () => _openVerificationScreen(context),
+                      onPressed: () =>{},
                       text: "Reset"),
                   20.sizeBoxHeight,
                 ],
@@ -58,7 +56,5 @@ class CreatePasswordScreen extends StatelessWidget {
     );
   }
 
-  void _openVerificationScreen(BuildContext context) {
-    AppNavigator.push(context, const VerificationScreen());
-  }
+ 
 }

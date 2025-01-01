@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../utils/helper_functions.dart';
-
 class DateSelectionWidget extends StatefulWidget {
   final DateTime? selectedDate;
   final void Function(DateTime) onDateSelection;
@@ -56,11 +54,6 @@ class _DateSelectionWidgetState extends State<DateSelectionWidget> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                selectedDate != null
-                    ? getFormattedDate(selectedDate!)
-                    : 'Date of Birth',
-              ),
               const Icon(
                 Icons.date_range_rounded,
                 color: Colors.grey,
