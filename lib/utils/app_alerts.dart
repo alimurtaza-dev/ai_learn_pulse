@@ -1,35 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class AppAlerts {
   AppAlerts._();
 
   static void showErrorMessage(BuildContext context, [String? message]) {
-    showTopSnackBar(
-      Overlay.of(context),
-      CustomSnackBar.error(
+    ScaffoldMessenger.of(context).showSnackBar(
+      _buildSnackBar(
         message: message ?? "Something went wrong",
+        backgroundColor: Colors.red,
       ),
     );
   }
 
   static void showInfoMessage(BuildContext context, String message) {
-    showTopSnackBar(
-      Overlay.of(context),
-      CustomSnackBar.info(
+    ScaffoldMessenger.of(context).showSnackBar(
+      _buildSnackBar(
         message: message,
+        backgroundColor: Colors.blue,
       ),
     );
   }
 
   static void showSuccessMessage(BuildContext context, String message) {
-    showTopSnackBar(
-      Overlay.of(context),
-      CustomSnackBar.success(
+    ScaffoldMessenger.of(context).showSnackBar(
+      _buildSnackBar(
         message: message,
+        backgroundColor: Colors.green,
       ),
+    );
+  }
+
+  static SnackBar _buildSnackBar({
+    required String message,
+    required Color backgroundColor,
+  }) {
+    return SnackBar(
+      content: Text(
+        message,
+        textAlign: TextAlign.center,
+        style: TextStyle(color: Colors.white),
+      ),
+      width: 250,
+      backgroundColor: backgroundColor,
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      duration: Duration(seconds: 1),
     );
   }
 }

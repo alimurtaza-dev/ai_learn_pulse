@@ -14,7 +14,7 @@ class MyPref {
   }
 
   static void saveUser(List<UserData> users) async {
-    _storage.remove(AppPrefrenceConstants.currentUser); // Clear existing data
+    _storage.remove(AppPrefrenceConstants.currentUser); 
     final userDataList = users.map((user) => user.toJson()).toList();
     await _storage.write(AppPrefrenceConstants.currentUser, userDataList);
   }

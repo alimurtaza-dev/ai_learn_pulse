@@ -1,15 +1,16 @@
 import 'package:ai_learn_pulse/repository/auth_repository/auth_repository.dart';
+import 'package:ai_learn_pulse/screens/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:get_storage/get_storage.dart';
 
-import 'bloc/bloc/login_bloc.dart';
+import 'bloc/login_bloc/login_bloc.dart';
 import 'gen/colors.gen.dart';
-import 'screens/login_screen/login_screen.dart';
-import 'services/storage/session_manager/session_controller.dart';
 
 GetIt getIt = GetIt.instance;
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   servicesLocator();
   runApp(
     const AiLearnPulse(),
@@ -29,7 +30,7 @@ class AiLearnPulse extends StatelessWidget {
           appBarTheme: const AppBarTheme(
             surfaceTintColor: ColorName.white,
           )),
-      home: LoginScreen(),
+      home: SplashScreen(),
     );
   }
 }
@@ -39,5 +40,4 @@ void servicesLocator() {
   getIt.registerLazySingleton<AuthRepository>(() => AuthRepository());
   getIt.registerFactory<LoginBloc>(
       () => LoginBloc(authRepository: getIt<AuthRepository>()));
-  getIt.registerLazySingleton<SessionController>(() => SessionController());
 }

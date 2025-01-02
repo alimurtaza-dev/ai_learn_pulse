@@ -8,11 +8,11 @@ import '../../models/login_model/login_response_model.dart';
 import '../../utils/server.dart';
 
 class AuthRepository {
-  Future<LoginResponseModel> userlogin(String email, String password) async {
+  Future<LoginResponseModel> userlogin(String phone, String password) async {
     try {
       final userdata = FormData();
       userdata.fields.addAll([
-        MapEntry('mobile_no', email),
+        MapEntry('mobile_no', phone.replaceFirst("+", "")),
         MapEntry('password', password),
       ]);
       final Response response = await Server.post(

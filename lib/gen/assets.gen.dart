@@ -31,6 +31,14 @@ class $AssetsAppIconsGen {
   /// File path: assets/app_icons/email.svg
   SvgGenImage get email => const SvgGenImage('assets/app_icons/email.svg');
 
+  /// File path: assets/app_icons/lmsLogo.jpg
+  AssetGenImage get lmsLogo =>
+      const AssetGenImage('assets/app_icons/lmsLogo.jpg');
+
+  /// File path: assets/app_icons/lmsLogopng.png
+  AssetGenImage get lmsLogopng =>
+      const AssetGenImage('assets/app_icons/lmsLogopng.png');
+
   /// File path: assets/app_icons/password.svg
   SvgGenImage get password =>
       const SvgGenImage('assets/app_icons/password.svg');
@@ -40,7 +48,8 @@ class $AssetsAppIconsGen {
       const SvgGenImage('assets/app_icons/place_holder.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [email, password, placeHolder];
+  List<dynamic> get values =>
+      [email, lmsLogo, lmsLogopng, password, placeHolder];
 }
 
 class $AssetsAppImagesGen {
