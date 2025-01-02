@@ -110,7 +110,6 @@ class LoginScreen extends StatelessWidget {
                         previous.status != current.status,
                     builder: (context, state) {
                       return AppButton(
-                        
                         isUploading: state.status == LoginStatus.loading,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {

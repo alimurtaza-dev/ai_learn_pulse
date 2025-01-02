@@ -97,6 +97,9 @@ class ColorName {
     },
   );
 
+  /// Color: #F6F6F5
+  static const Color secondaryColor = Color(0xFFF6F6F5);
+
   /// MaterialColor:
   ///   50: #FFFFFFFF
   ///   100: #FFFFFFFF

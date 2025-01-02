@@ -6,5 +6,6 @@
  <color name="black" type="material">#000000</color>
  <color name="white" type="material">#FFFFFF</color>
  <color name="darkGrey">#2E2D2C</color>
+ <color name="secondaryColor">#F6F6F5</color>
 
 </resources>
