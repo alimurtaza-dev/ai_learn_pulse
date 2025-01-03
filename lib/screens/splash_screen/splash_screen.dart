@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../services/splash/splash_service.dart';
 
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -24,11 +23,12 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Center(
         child: SizedBox(
-            height: 200,
-            width: 200,
-            child: Image.asset(
-              Assets.appImages.lmsLogo.path,
-            )),
+          height: 300,
+          width: 300,
+          child: Image.asset(
+            Assets.appImages.splash.path,
+          ),
+        ),
       ),
     );
   }

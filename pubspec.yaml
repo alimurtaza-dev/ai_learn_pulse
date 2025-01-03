@@ -41,11 +41,13 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   build_runner:
   flutter_gen_runner:
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: "^0.14.2"
 
 flutter_launcher_icons:
   android: true
   image_path: "assets/app_images/lmsLogopng.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/app_images/lmsLogopng.png"
 
 flutter_gen:
   integrations:

@@ -1,4 +1,5 @@
 import 'package:ai_learn_pulse/widgets/loading_animation.dart';
+import 'package:ai_learn_pulse/widgets/network_image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,8 +38,9 @@ class TimeTableScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                   child: Row(
+                    spacing: 12,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
@@ -52,7 +54,6 @@ class TimeTableScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 16),
                       Expanded(
                         child: Text(
                           'Course',
@@ -103,7 +104,7 @@ class TimeTableScreen extends StatelessWidget {
       }
 
       return ListView.builder(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         itemCount: filteredClasses.length,
         itemBuilder: (context, index) {
           final classInfo = filteredClasses[index];
@@ -145,7 +146,7 @@ class TimeTableScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                width: 16,
+                width: 12,
                 child: Column(
                   children: [
                     Container(
@@ -159,7 +160,7 @@ class TimeTableScreen extends StatelessWidget {
                     if (index < filteredClasses.length)
                       Container(
                         width: 2,
-                        height: 80,
+                        height: 150,
                         color: lineColor,
                       ),
                   ],
@@ -172,23 +173,71 @@ class TimeTableScreen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
+                      spacing: 12,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          classInfo.courseId?.title ?? 'No Title',
-                          style: AppTextStyle.appMediumTextStyle(
-                            size: 16,
-                            color: ColorName.white,
-                            fontWeight: FontWeight.w600,
-                          ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          spacing: 5,
+                          children: [
+                            Text(
+                              classInfo.courseId?.title ?? 'No Title',
+                              style: AppTextStyle.appMediumTextStyle(
+                                size: 18,
+                                color: ColorName.white,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              classInfo.courseId?.description ?? '',
+                              style: AppTextStyle.appMediumTextStyle(
+                                size: 14,
+                                color: ColorName.white,
+                              ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 8),
-                        Text(
-                          classInfo.roomNo ?? 'No Room',
-                          style: AppTextStyle.appMediumTextStyle(
-                            size: 14,
-                            color: ColorName.white,
-                          ),
+                        Row(
+                          spacing: 6,
+                          children: [
+                            Icon(
+                              Icons.location_on_outlined,
+                              color: ColorName.white,
+                            ),
+                            Text(
+                              "Room ${classInfo.roomNo ?? ''}",
+                              style: AppTextStyle.appMediumTextStyle(
+                                size: 14,
+                                color: ColorName.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          spacing: 6,
+                          children: [
+                            SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircleAvatar(
+                                  child: ClipOval(
+                                    child: NetworkImageView(
+                                        classInfo.teacherId?.user?.contacts
+                                                ?.imageUrl ??
+                                            '',
+                                        fit: BoxFit.cover,
+                                        height: 20,
+                                        width: 20),
+                                  ),
+                                )),
+                            Text(
+                              "${classInfo.teacherId?.user?.contacts?.fName ?? ''} ${classInfo.teacherId?.user?.contacts?.fName ?? ''}",
+                              style: AppTextStyle.appMediumTextStyle(
+                                size: 14,
+                                color: ColorName.white,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

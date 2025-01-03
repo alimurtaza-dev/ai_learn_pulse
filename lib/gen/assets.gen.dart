@@ -58,8 +58,13 @@ class $AssetsAppImagesGen {
   AssetGenImage get loginScreenImage =>
       const AssetGenImage('assets/app_images/loginScreenImage.png');
 
+  /// File path: assets/app_images/splash.png
+  AssetGenImage get splash =>
+      const AssetGenImage('assets/app_images/splash.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [lmsLogo, lmsLogopng, loginScreenImage];
+  List<AssetGenImage> get values =>
+      [lmsLogo, lmsLogopng, loginScreenImage, splash];
 }
 
 class $AssetsColorsGen {

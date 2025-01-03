@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 String removeHtmlTags(String html) {
   final RegExp exp = RegExp("<[^>]*>", multiLine: true);
   return html.replaceAll(exp, '').trimLeft();
@@ -121,8 +120,6 @@ void showUnableToPostDialog(BuildContext context) {
     },
   );
 }
-
-
 
 Future<DateTime?> selectDate(
     BuildContext context, DateTime? selectedDate) async {

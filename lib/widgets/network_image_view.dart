@@ -29,9 +29,9 @@ class NetworkImageView extends StatelessWidget {
             width: width,
             imageUrl: _imageUrl,
             fit: fit,
-            placeholder: (_, __) => const ShimmerLoadingWidget(
+            placeholder: (_, __) => ShimmerLoadingWidget(
               isLoading: true,
-              child: ColoredBox(color: Colors.black),
+              child: ColoredBox(color: Colors.black.withValues(alpha: 0.4)),
             ),
             errorWidget: (_, __, ___) => _buildErrorView(),
           );

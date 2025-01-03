@@ -1,6 +1,7 @@
 import 'package:ai_learn_pulse/main.dart';
 import 'package:ai_learn_pulse/screens/home_screen/home_screen.dart';
 import 'package:ai_learn_pulse/utils/app_alerts.dart';
+import 'package:ai_learn_pulse/utils/mobile_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,6 +27,9 @@ class LoginScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => getIt<LoginBloc>(),
       child: Scaffold(
+        appBar: MobileAppBar(
+          isShowBackButton: false,
+        ),
         body: SingleChildScrollView(
           child: Form(
             key: _formKey,
@@ -43,7 +47,6 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  30.sizeBoxHeight,
                   Image.asset(Assets.appImages.loginScreenImage.path),
                   Text(
                     'Login to your Account',
