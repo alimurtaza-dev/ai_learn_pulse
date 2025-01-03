@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import '../gen/colors.gen.dart';
 import '../utils/text_style.dart';
 import '../widgets/loading_animation.dart';
@@ -43,12 +42,13 @@ class AppButton extends StatelessWidget {
               )),
           onPressed: onPressed,
           child: isUploading
-              ? const LoadingAnimation()
+              ? const LoadingAnimation(
+                  color: ColorName.white,
+                )
               : Text(
                   text,
                   style: AppTextStyle.appMediumTextStyle(
-                      size: textSize ?? 18,
-                      color: textColor ?? Colors.white),
+                      size: textSize ?? 18, color: textColor ?? Colors.white),
                 )),
     );
   }

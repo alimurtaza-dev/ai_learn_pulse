@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
             height: 200,
             width: 200,
             child: Image.asset(
-              Assets.appIcons.lmsLogo.path,
+              Assets.appImages.lmsLogo.path,
             )),
       ),
     );

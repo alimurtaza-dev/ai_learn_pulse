@@ -1,4 +1,6 @@
+import 'package:ai_learn_pulse/bloc/student_bloc/student_bloc.dart';
 import 'package:ai_learn_pulse/repository/auth_repository/auth_repository.dart';
+import 'package:ai_learn_pulse/repository/student_repository/student_repository.dart';
 import 'package:ai_learn_pulse/screens/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -40,4 +42,8 @@ void servicesLocator() {
   getIt.registerLazySingleton<AuthRepository>(() => AuthRepository());
   getIt.registerFactory<LoginBloc>(
       () => LoginBloc(authRepository: getIt<AuthRepository>()));
+  getIt.registerLazySingleton<StudentRepository>(() => StudentRepository());
+  getIt.registerFactory<StudentBloc>(
+    () => StudentBloc(studentRepository: getIt<StudentRepository>()),
+  );
 }

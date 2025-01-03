@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:ai_learn_pulse/gen/colors.gen.dart';
-import 'package:ai_learn_pulse/utils/text_style.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DayTabs extends StatefulWidget {
+import '../../../bloc/student_bloc/student_bloc.dart';
+import '../../../gen/colors.gen.dart';
+import '../../../utils/text_style.dart';
+
+class DayTabs extends StatelessWidget {
   const DayTabs({
     super.key,
     required this.tabNames,
@@ -13,56 +16,51 @@ class DayTabs extends StatefulWidget {
   final Function(int) onTabSelected;
 
   @override
-  State<DayTabs> createState() => _DayTabsState();
-}
-
-class _DayTabsState extends State<DayTabs> {
-  int _selectedIndex = 0;
-
-  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-      child: SizedBox(
-        height: 35,
-        child: ListView.separated(
-          scrollDirection: Axis.horizontal,
-          itemCount: widget.tabNames.length,
-          separatorBuilder: (context, index) => const SizedBox(width: 8),
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                setState(() {
-                  _selectedIndex = index;
-                  widget.onTabSelected(index);
-                });
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: _selectedIndex == index
-                      ? ColorName.primaryColor
-                      : ColorName.secondaryColor,
-                ),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-                child: Center(
-                  child: Text(
-                    widget.tabNames[index],
-                    style: AppTextStyle.appMediumTextStyle(
-                      color: _selectedIndex == index
-                          ? ColorName.white
-                          : Colors.black.withValues(alpha: .6),
-                      size: 12,
-                      fontWeight: FontWeight.bold,
+    return BlocBuilder<StudentBloc, StudentState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+          child: SizedBox(
+            height: 35,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: tabNames.length,
+              separatorBuilder: (context, index) => const SizedBox(width: 8),
+              itemBuilder: (context, index) {
+                final isSelected = tabNames[index] == state.selectedDay;
+                return GestureDetector(
+                  onTap: () {
+                    onTabSelected(index);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: isSelected
+                          ? ColorName.primaryColor
+                          : ColorName.secondaryColor,
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                    child: Center(
+                      child: Text(
+                        tabNames[index].substring(0, 3).toUpperCase(),
+                        style: AppTextStyle.appMediumTextStyle(
+                          color: isSelected
+                              ? ColorName.white
+                              : ColorName.black.withValues(alpha: .6),
+                          size: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-            );
-          },
-        ),
-      ),
+                );
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }

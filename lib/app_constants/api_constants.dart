@@ -16,4 +16,5 @@ class ApiConstants {
 
   static const loginUrl = '/login';
   static const loggedinUserUrl = '/loggedin/user';
+  static const authStudentUrl = '/auth/student';
 }
