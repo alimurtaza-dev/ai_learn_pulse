@@ -18,70 +18,80 @@ class HomeScreen extends StatelessWidget {
       child: BlocBuilder<HomeBloc, HomeStates>(
         builder: (context, state) {
           final tabState = (state as HomeInitial).tabState;
-          return Scaffold(
-            bottomNavigationBar: BottomNavigationBar(
-              fixedColor: ColorName.primaryColor,
-              backgroundColor: isDarkMode ? Colors.black : Colors.white,
-              type: BottomNavigationBarType.fixed,
-              currentIndex: TabChangeStates.values.indexOf(tabState),
-              // selectedItemColor: ColorName.primaryColor,
-              onTap: (value) {
-                context.read<HomeBloc>().add(
-                      UpdateTabChangeStates(TabChangeStates.values[value]),
-                    );
-              },
-              items: [
-                BottomNavigationBarItem(
-                  icon: Assets.appIcons.home.svg(
-                    height: 25,
-                    colorFilter: ColorFilter.mode(
-                      tabState == TabChangeStates.home
-                          ? ColorName.primaryColor
-                          : Colors.grey,
-                      BlendMode.srcIn,
+          return WillPopScope(
+            onWillPop: () async {
+              if (tabState.index != 0) {
+                context
+                    .read<HomeBloc>()
+                    .add(UpdateTabChangeStates(TabChangeStates.values[0]));
+                return false;
+              }
+              return true;
+            },
+            child: Scaffold(
+              bottomNavigationBar: BottomNavigationBar(
+                fixedColor: ColorName.primaryColor,
+                backgroundColor: isDarkMode ? Colors.black : Colors.white,
+                type: BottomNavigationBarType.fixed,
+                currentIndex: TabChangeStates.values.indexOf(tabState),
+                onTap: (value) {
+                  context.read<HomeBloc>().add(
+                        UpdateTabChangeStates(TabChangeStates.values[value]),
+                      );
+                },
+                items: [
+                  BottomNavigationBarItem(
+                    icon: Assets.appIcons.home.svg(
+                      height: 25,
+                      colorFilter: ColorFilter.mode(
+                        tabState == TabChangeStates.home
+                            ? ColorName.primaryColor
+                            : Colors.grey,
+                        BlendMode.srcIn,
+                      ),
                     ),
+                    label: 'Home',
                   ),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Assets.appIcons.timeTable.svg(
-                    height: 25,
-                    colorFilter: ColorFilter.mode(
-                      tabState == TabChangeStates.timeTable
-                          ? ColorName.primaryColor
-                          : Colors.grey,
-                      BlendMode.srcIn,
+                  BottomNavigationBarItem(
+                    icon: Assets.appIcons.timeTable.svg(
+                      height: 25,
+                      colorFilter: ColorFilter.mode(
+                        tabState == TabChangeStates.timeTable
+                            ? ColorName.primaryColor
+                            : Colors.grey,
+                        BlendMode.srcIn,
+                      ),
                     ),
+                    label: 'Time Table',
                   ),
-                  label: 'Time Table',
-                ),
-                BottomNavigationBarItem(
-                  icon: Assets.appIcons.examination.svg(
-                    height: 25,
-                    colorFilter: ColorFilter.mode(
-                      tabState == TabChangeStates.examination
-                          ? ColorName.primaryColor
-                          : Colors.grey,
-                      BlendMode.srcIn,
+                  BottomNavigationBarItem(
+                    icon: Assets.appIcons.examination.svg(
+                      height: 25,
+                      colorFilter: ColorFilter.mode(
+                        tabState == TabChangeStates.examination
+                            ? ColorName.primaryColor
+                            : Colors.grey,
+                        BlendMode.srcIn,
+                      ),
                     ),
+                    label: 'Examination',
                   ),
-                  label: 'Examination',
-                ),
-                BottomNavigationBarItem(
-                  icon: Assets.appIcons.settings.svg(
-                    height: 25,
-                    colorFilter: ColorFilter.mode(
-                      tabState == TabChangeStates.settings
-                          ? ColorName.primaryColor
-                          : Colors.grey,
-                      BlendMode.srcIn,
+                  BottomNavigationBarItem(
+                    icon: Assets.appIcons.settings.svg(
+                      height: 25,
+                      colorFilter: ColorFilter.mode(
+                        tabState == TabChangeStates.settings
+                            ? ColorName.primaryColor
+                            : Colors.grey,
+                        BlendMode.srcIn,
+                      ),
                     ),
+                    label: 'Settings',
                   ),
-                  label: 'Settings',
-                ),
-              ],
+                ],
+              ),
+              body: _buildBody(tabState),
             ),
-            body: _buildBody(tabState),
           );
         },
       ),
