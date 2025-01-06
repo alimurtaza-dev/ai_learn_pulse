@@ -12,22 +12,25 @@ void copyTextToClipboard(
   BuildContext context, {
   required String text,
   String? copyMessage,
-}) {
-  Clipboard.setData(ClipboardData(text: text))
-      .then(
-        (value) => ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              copyMessage ?? "Copied to Clipboard Successfully ",
-            ),
+}) async {
+  try {
+    await Clipboard.setData(ClipboardData(text: text));
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            copyMessage ?? "Copied to Clipboard Successfully",
           ),
         ),
-      )
-      .catchError(
-        (error) => ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Copy failed: $error')),
-        ),
       );
+    }
+  } catch (error) {
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Copy failed: $error')),
+      );
+    }
+  }
 }
 
 Future<bool> isInternetAvailable() async {

@@ -1,4 +1,5 @@
 import 'package:ai_learn_pulse/gen/assets.gen.dart';
+import 'package:ai_learn_pulse/utils/mobile_appbar.dart';
 import 'package:flutter/material.dart';
 
 import '../../services/splash/splash_service.dart';
@@ -21,6 +22,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: MobileAppBar(
+        isShowBackButton: false,
+      ),
       body: Center(
         child: SizedBox(
           height: 300,

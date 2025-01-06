@@ -2,6 +2,7 @@ import 'package:ai_learn_pulse/widgets/loading_animation.dart';
 import 'package:ai_learn_pulse/widgets/network_image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../app_constants/app_constants.dart';
 import '../../bloc/student_bloc/student_bloc.dart';
@@ -40,7 +41,6 @@ class TimeTableScreen extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                   child: Row(
-                    spacing: 12,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
@@ -89,7 +89,8 @@ class TimeTableScreen extends StatelessWidget {
   }
 
   Widget _buildTimetableContent(StudentState state) {
-    if (state.status == StudentStatus.loading) {
+    if (state.status == StudentStatus.loading ||
+        state.status == StudentStatus.initial) {
       return const Center(child: LoadingAnimation());
     } else if (state.status == StudentStatus.error) {
       return Center(child: Text(state.message));
@@ -100,21 +101,26 @@ class TimeTableScreen extends StatelessWidget {
           .toList();
 
       if (filteredClasses.isEmpty) {
-        return const Center(child: Text('No classes available for this day.'));
+        return Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Lottie.asset(
+              'assets/animations/no_data.json',
+              width: 200,
+              height: 200,
+              fit: BoxFit.contain,
+            ),
+            Text('No classes available for this day.'),
+          ],
+        ));
       }
 
       return ListView.builder(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         itemCount: filteredClasses.length,
         itemBuilder: (context, index) {
           final classInfo = filteredClasses[index];
-          final bool isPrimary = index <= 2;
-          final Color dotColor = isPrimary
-              ? ColorName.primaryColor
-              : ColorName.darkGrey.withValues(alpha: .6);
-          final Color lineColor = isPrimary
-              ? ColorName.primaryColor
-              : ColorName.darkGrey.withValues(alpha: .6);
 
           return Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,31 +151,10 @@ class TimeTableScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
-                width: 12,
-                child: Column(
-                  children: [
-                    Container(
-                      width: 12,
-                      height: 12,
-                      decoration: BoxDecoration(
-                        color: dotColor,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    if (index < filteredClasses.length)
-                      Container(
-                        width: 2,
-                        height: 150,
-                        color: lineColor,
-                      ),
-                  ],
-                ),
-              ),
               Expanded(
                 child: Card(
                   elevation: 0,
-                  color: ColorName.primaryColor,
+                  color: ColorName.secondaryColor,
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
@@ -184,7 +169,7 @@ class TimeTableScreen extends StatelessWidget {
                               classInfo.courseId?.title ?? 'No Title',
                               style: AppTextStyle.appMediumTextStyle(
                                 size: 18,
-                                color: ColorName.white,
+                                color: ColorName.black,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -192,7 +177,7 @@ class TimeTableScreen extends StatelessWidget {
                               classInfo.courseId?.description ?? '',
                               style: AppTextStyle.appMediumTextStyle(
                                 size: 14,
-                                color: ColorName.white,
+                                color: ColorName.black,
                               ),
                             ),
                           ],
@@ -202,13 +187,13 @@ class TimeTableScreen extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.location_on_outlined,
-                              color: ColorName.white,
+                              color: ColorName.black,
                             ),
                             Text(
                               "Room ${classInfo.roomNo ?? ''}",
                               style: AppTextStyle.appMediumTextStyle(
                                 size: 14,
-                                color: ColorName.white,
+                                color: ColorName.black,
                               ),
                             ),
                           ],
@@ -234,7 +219,7 @@ class TimeTableScreen extends StatelessWidget {
                               "${classInfo.teacherId?.user?.contacts?.fName ?? ''} ${classInfo.teacherId?.user?.contacts?.fName ?? ''}",
                               style: AppTextStyle.appMediumTextStyle(
                                 size: 14,
-                                color: ColorName.white,
+                                color: ColorName.black,
                               ),
                             ),
                           ],

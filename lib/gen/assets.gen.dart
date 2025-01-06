@@ -15,6 +15,9 @@ import 'package:vector_graphics/vector_graphics.dart' as _vg;
 class $AssetsAnimationsGen {
   const $AssetsAnimationsGen();
 
+  /// File path: assets/animations/in_progress.json
+  String get inProgress => 'assets/animations/in_progress.json';
+
   /// File path: assets/animations/no_data.json
   String get noData => 'assets/animations/no_data.json';
 
@@ -22,14 +25,25 @@ class $AssetsAnimationsGen {
   String get registerSuccess => 'assets/animations/register_success.json';
 
   /// List of all assets
-  List<String> get values => [noData, registerSuccess];
+  List<String> get values => [inProgress, noData, registerSuccess];
 }
 
 class $AssetsAppIconsGen {
   const $AssetsAppIconsGen();
 
+  /// File path: assets/app_icons/assessment.svg
+  SvgGenImage get assessment =>
+      const SvgGenImage('assets/app_icons/assessment.svg');
+
   /// File path: assets/app_icons/email.svg
   SvgGenImage get email => const SvgGenImage('assets/app_icons/email.svg');
+
+  /// File path: assets/app_icons/examination.svg
+  SvgGenImage get examination =>
+      const SvgGenImage('assets/app_icons/examination.svg');
+
+  /// File path: assets/app_icons/home.svg
+  SvgGenImage get home => const SvgGenImage('assets/app_icons/home.svg');
 
   /// File path: assets/app_icons/password.svg
   SvgGenImage get password =>
@@ -39,8 +53,25 @@ class $AssetsAppIconsGen {
   SvgGenImage get placeHolder =>
       const SvgGenImage('assets/app_icons/place_holder.svg');
 
+  /// File path: assets/app_icons/settings.svg
+  SvgGenImage get settings =>
+      const SvgGenImage('assets/app_icons/settings.svg');
+
+  /// File path: assets/app_icons/timeTable.svg
+  SvgGenImage get timeTable =>
+      const SvgGenImage('assets/app_icons/timeTable.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [email, password, placeHolder];
+  List<SvgGenImage> get values => [
+        assessment,
+        email,
+        examination,
+        home,
+        password,
+        placeHolder,
+        settings,
+        timeTable
+      ];
 }
 
 class $AssetsAppImagesGen {

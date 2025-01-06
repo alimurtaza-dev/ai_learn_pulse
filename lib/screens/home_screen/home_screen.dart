@@ -1,6 +1,7 @@
 import 'package:ai_learn_pulse/bloc/home_bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../gen/assets.gen.dart';
 import '../../../../gen/colors.gen.dart';
@@ -19,10 +20,11 @@ class HomeScreen extends StatelessWidget {
           final tabState = (state as HomeInitial).tabState;
           return Scaffold(
             bottomNavigationBar: BottomNavigationBar(
+              fixedColor: ColorName.primaryColor,
               backgroundColor: isDarkMode ? Colors.black : Colors.white,
               type: BottomNavigationBarType.fixed,
               currentIndex: TabChangeStates.values.indexOf(tabState),
-              selectedItemColor: ColorName.primaryColor,
+              // selectedItemColor: ColorName.primaryColor,
               onTap: (value) {
                 context.read<HomeBloc>().add(
                       UpdateTabChangeStates(TabChangeStates.values[value]),
@@ -30,16 +32,19 @@ class HomeScreen extends StatelessWidget {
               },
               items: [
                 BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.home,
-                    color: tabState == TabChangeStates.home
-                        ? ColorName.primaryColor
-                        : Colors.grey,
+                  icon: Assets.appIcons.home.svg(
+                    height: 25,
+                    colorFilter: ColorFilter.mode(
+                      tabState == TabChangeStates.home
+                          ? ColorName.primaryColor
+                          : Colors.grey,
+                      BlendMode.srcIn,
+                    ),
                   ),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
-                  icon: Assets.appIcons.placeHolder.svg(
+                  icon: Assets.appIcons.timeTable.svg(
                     height: 25,
                     colorFilter: ColorFilter.mode(
                       tabState == TabChangeStates.timeTable
@@ -51,19 +56,7 @@ class HomeScreen extends StatelessWidget {
                   label: 'Time Table',
                 ),
                 BottomNavigationBarItem(
-                  icon: Assets.appIcons.placeHolder.svg(
-                    height: 25,
-                    colorFilter: ColorFilter.mode(
-                      tabState == TabChangeStates.assessment
-                          ? ColorName.primaryColor
-                          : Colors.grey,
-                      BlendMode.srcIn,
-                    ),
-                  ),
-                  label: 'Assessment',
-                ),
-                BottomNavigationBarItem(
-                  icon: Assets.appIcons.placeHolder.svg(
+                  icon: Assets.appIcons.examination.svg(
                     height: 25,
                     colorFilter: ColorFilter.mode(
                       tabState == TabChangeStates.examination
@@ -75,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                   label: 'Examination',
                 ),
                 BottomNavigationBarItem(
-                  icon: Assets.appIcons.placeHolder.svg(
+                  icon: Assets.appIcons.settings.svg(
                     height: 25,
                     colorFilter: ColorFilter.mode(
                       tabState == TabChangeStates.settings
@@ -98,15 +91,53 @@ class HomeScreen extends StatelessWidget {
   Widget _buildBody(TabChangeStates tabState) {
     switch (tabState) {
       case TabChangeStates.home:
-        return const Center(child: Text('Home Screen Content'));
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Lottie.asset(
+                'assets/animations/in_progress.json',
+                width: 200,
+                height: 200,
+                fit: BoxFit.contain,
+              ),
+              Text('In Progress')
+            ],
+          ),
+        );
       case TabChangeStates.timeTable:
         return TimeTableScreen();
-      case TabChangeStates.assessment:
-        return const Center(child: Text('Assessment Screen Content'));
+
       case TabChangeStates.examination:
-        return const Center(child: Text('Examination Screen Content'));
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Lottie.asset(
+                'assets/animations/in_progress.json',
+                width: 200,
+                height: 200,
+                fit: BoxFit.contain,
+              ),
+              Text('In Progress')
+            ],
+          ),
+        );
       case TabChangeStates.settings:
-        return const Center(child: Text('Settings Screen Content'));
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Lottie.asset(
+                'assets/animations/in_progress.json',
+                width: 200,
+                height: 200,
+                fit: BoxFit.contain,
+              ),
+              Text('In Progress')
+            ],
+          ),
+        );
     }
   }
 }

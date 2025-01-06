@@ -30,6 +30,8 @@ android {
         versionName "1.1"
     }
 
+    
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
@@ -38,6 +40,9 @@ android {
         }
     }
 }
+dependencies {
+    implementation 'com.google.errorprone:error_prone_annotations:2.11.0'
+    }
 
 flutter {
     source = "../.."
