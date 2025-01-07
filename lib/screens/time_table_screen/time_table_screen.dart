@@ -216,7 +216,7 @@ class TimeTableScreen extends StatelessWidget {
                                   ),
                                 )),
                             Text(
-                              "${classInfo.teacherId?.user?.contacts?.fName ?? ''} ${classInfo.teacherId?.user?.contacts?.fName ?? ''}",
+                              "${classInfo.teacherId?.user?.contacts?.fName ?? ''} ${classInfo.teacherId?.user?.contacts?.lName ?? ''}",
                               style: AppTextStyle.appMediumTextStyle(
                                 size: 14,
                                 color: ColorName.black,
